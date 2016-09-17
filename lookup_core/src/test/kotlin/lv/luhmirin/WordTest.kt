@@ -13,5 +13,4 @@ class WordTest {
         word.wordDigits shouldEqual "7678"
     }
 
-
 }

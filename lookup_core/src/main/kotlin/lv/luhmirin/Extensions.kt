@@ -1,8 +1,15 @@
 package lv.luhmirin
 
-
+/**
+ * Autobots, digitize!!!!!!!!!
+ *
+ * transforms string to its T9 form.
+ */
 fun String.digitize(): String = this.map { it.toDigit() }.joinToString("")
 
+/**
+ * Transforms letters to numbers according to phone keypad.
+ */
 fun Char.toDigit(): Char = when (this) {
     in 'a'..'c' -> '2'
     in 'd'..'f' -> '3'

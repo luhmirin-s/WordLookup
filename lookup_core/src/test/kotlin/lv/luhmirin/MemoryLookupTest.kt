@@ -4,7 +4,6 @@ import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldNotContain
 import org.junit.Before
 import org.junit.Test
-import java.io.File
 
 class MemoryLookupTest {
 
@@ -43,19 +42,6 @@ class MemoryLookupTest {
         result shouldContain "aback"
 
         result shouldNotContain "abaft"
-    }
-
-    @Test
-    fun loadDictionaryPerformance() {
-        val file = File("../app/src/main/assets/wordlist.txt")
-
-        subject.loadDictionary(file.readLines())
-
-        val result = subject.lookup("7678")
-
-        result shouldContain "sort"
-        result shouldContain "post"
-        result shouldContain "postbag"
     }
 
 }

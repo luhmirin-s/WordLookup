@@ -49,7 +49,6 @@ public class LookupActivityTest {
         idlingResource = LookupWrapper.getInstance().getIdlingResource();
         Espresso.registerIdlingResources(idlingResource);
 
-
         activityRule.launchActivity(new Intent());
     }
 
@@ -68,8 +67,6 @@ public class LookupActivityTest {
         if (idlingResource != null) {
             Espresso.unregisterIdlingResources(idlingResource);
         }
-        LookupWrapper.getInstance().cleanup();
-
     }
 
     private Matcher<View> recyclerNotEmpty() {

@@ -22,6 +22,13 @@ import java.util.concurrent.Executors;
 import lv.luhmirin.MemoryLookup;
 import lv.luhmirin.WordLookup;
 
+/**
+ * Singleton wrapper for actual in-memory WordLookup instance.
+ *
+ * This class is singleton to make sure that we do not load unnecessary copies of full dictionary.
+ * In ideal world this class would be instantiated and controlled by Dagger, but it seems unnecessary
+ * for such trivial application.
+ */
 public class LookupWrapper {
 
     private static final String FILENAME = "wordlist.txt";
@@ -35,15 +42,12 @@ public class LookupWrapper {
         return instance;
     }
 
+    @Nullable private WordLookup wordLookup;
     @Nullable private CountingIdlingResource idlingResource;
-
-    private WordLookup wordLookup;
+    @NotNull private Set<LookupReadyListener> listeners = new HashSet<>();
     private boolean hasDictionary = false;
 
-    private Set<LookupReadyListener> listeners = new HashSet<>();
-
-
-    public void initFromFile(final Handler mainHandler, final AssetManager assets) {
+    public void initFromFile(@NotNull final Handler mainHandler, @NotNull final AssetManager assets) {
         if (idlingResource != null) {
             idlingResource.increment();
         }
@@ -66,7 +70,7 @@ public class LookupWrapper {
         });
     }
 
-    private void notifyListeners(Handler mainHandler) {
+    private void notifyListeners(@NotNull Handler mainHandler) {
         mainHandler.post(() -> {
             for (LookupReadyListener listener : listeners) {
                 listener.onReady();
@@ -101,9 +105,4 @@ public class LookupWrapper {
         return idlingResource;
     }
 
-    @VisibleForTesting
-    public void cleanup() {
-        wordLookup = null;
-        hasDictionary = false;
-    }
 }

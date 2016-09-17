@@ -6,6 +6,9 @@ import java.util.List;
 
 import lv.luhmirin.wordlookup.wrapper.LookupWrapper;
 
+/**
+ * POJO class that encapsulates business logic. 100% unit testable :)
+ */
 class LookupPresenter {
 
     private final LookupContract viewContract;

@@ -23,9 +23,9 @@ class LookupResultAdapter extends RecyclerView.Adapter<LookupResultAdapter.Looku
 
     private final Context context;
     private final List<String> results;
-    private int spanLength = 0;
-
     private final ForegroundColorSpan colorSpan;
+
+    private int spanLength = 0;
 
     LookupResultAdapter(Context context) {
         this.context = context;
@@ -42,9 +42,7 @@ class LookupResultAdapter extends RecyclerView.Adapter<LookupResultAdapter.Looku
     @Override
     public void onBindViewHolder(LookupResultViewHolder holder, int position) {
         Spannable item = new SpannableString(results.get(position));
-
         item.setSpan(colorSpan, 0, spanLength, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
         holder.text.setText(item);
     }
 
