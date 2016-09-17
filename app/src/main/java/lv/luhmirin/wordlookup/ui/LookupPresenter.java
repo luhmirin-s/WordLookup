@@ -4,7 +4,7 @@ package lv.luhmirin.wordlookup.ui;
 import java.util.Collections;
 import java.util.List;
 
-import lv.luhmirin.wordlookup.LookupWrapper;
+import lv.luhmirin.wordlookup.wrapper.LookupWrapper;
 
 class LookupPresenter {
 
@@ -19,6 +19,9 @@ class LookupPresenter {
     void onCreate() {
         viewContract.prepareResultListView();
         viewContract.prepareInputListener();
+        viewContract.disableInput();
+
+        lookupWrapper.setLookupReadyListener(viewContract::enableInput);
     }
 
 
@@ -39,7 +42,7 @@ class LookupPresenter {
     }
 
     private void showPlaceholder() {
-        viewContract.setResultList(Collections.<String>emptyList());
+        viewContract.setResultList(Collections.emptyList());
         viewContract.showPlaceHolder();
     }
 }

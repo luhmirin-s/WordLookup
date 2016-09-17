@@ -14,7 +14,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import lv.luhmirin.wordlookup.LookupWrapper;
+import lv.luhmirin.wordlookup.wrapper.LookupWrapper;
 import lv.luhmirin.wordlookup.R;
 import lv.luhmirin.wordlookup.util.SimpleTextWatcher;
 
@@ -45,6 +45,19 @@ public class LookupActivity extends AppCompatActivity implements LookupContract 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         results.setLayoutManager(layoutManager);
         results.setAdapter(resultsAdapter);
+    }
+
+    @Override
+    public void enableInput() {
+        input.setEnabled(true);
+        placeholder.setText(R.string.lookup_placeholder);
+    }
+
+    @Override
+    public void disableInput() {
+
+        input.setEnabled(false);
+        placeholder.setText(R.string.lookup_placeholder_loading);
     }
 
     @Override

@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Word Lookup</string>
+
     <string name="lookup_input_hint">Word in T9 form:</string>
+
+    <string name="lookup_placeholder_loading">Loading dictionary…</string>
     <string name="lookup_placeholder">Nothing to show :(</string>
 </resources>

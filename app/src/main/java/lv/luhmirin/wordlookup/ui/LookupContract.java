@@ -11,6 +11,10 @@ interface LookupContract {
 
     void prepareResultListView();
 
+    void enableInput();
+
+    void disableInput();
+
     void prepareInputListener();
 
     void setHighlightLength(int newHighlightLength);
@@ -20,4 +24,5 @@ interface LookupContract {
     void showPlaceHolder();
 
     void hidePlaceHolder();
+
 }

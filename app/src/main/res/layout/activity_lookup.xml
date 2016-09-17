@@ -5,6 +5,8 @@
     android:id="@+id/activity_lookup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -26,8 +28,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:digits="23456789"
+            android:enabled="false"
             android:hint="@string/lookup_input_hint"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:nextFocusLeft="@id/lookup_input"
+            android:nextFocusUp="@id/lookup_input" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.RecyclerView

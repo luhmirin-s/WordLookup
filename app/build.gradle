@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 24
@@ -11,6 +10,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        jackOptions {
+            enabled true
+        }
     }
     buildTypes {
         release {
@@ -35,7 +38,7 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$versions.support"
     compile "com.jakewharton:butterknife:$versions.butterknife"
 
-    apt "com.jakewharton:butterknife-compiler:$versions.butterknife"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$versions.butterknife"
 
     testCompile "junit:junit:$versions.junit"
     testCompile "org.mockito:mockito-core:$versions.mockito"

@@ -2,14 +2,18 @@ package lv.luhmirin.wordlookup.ui;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import lv.luhmirin.wordlookup.LookupWrapper;
+import lv.luhmirin.wordlookup.wrapper.LookupReadyListener;
+import lv.luhmirin.wordlookup.wrapper.LookupWrapper;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
@@ -20,6 +24,7 @@ public class LookupPresenterTest {
 
     @Mock LookupContract mockContract;
     @Mock LookupWrapper mockLookupWrapper;
+    @Captor ArgumentCaptor<LookupReadyListener> captorReadyListener;
 
     private LookupPresenter subject;
 
@@ -37,7 +42,20 @@ public class LookupPresenterTest {
         subject.onCreate();
 
         verify(mockContract).prepareResultListView();
+        verify(mockContract).disableInput();
         verify(mockContract).prepareInputListener();
+    }
+
+    @Test
+    public void enablesInput_whenLookupReady() throws Exception {
+        subject.onCreate();
+
+        verify(mockContract).disableInput();
+        verify(mockLookupWrapper).setLookupReadyListener(captorReadyListener.capture());
+
+        captorReadyListener.getValue().onReady();
+
+        verify(mockContract).enableInput();
     }
 
     @Test
