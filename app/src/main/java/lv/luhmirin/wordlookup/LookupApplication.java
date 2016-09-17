@@ -12,7 +12,5 @@ public class LookupApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        LookupWrapper.getInstance().initFromFile(new Handler(Looper.getMainLooper()), getAssets());
     }
 }

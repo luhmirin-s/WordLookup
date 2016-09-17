@@ -3,6 +3,10 @@ package lv.luhmirin.wordlookup.wrapper;
 
 import android.content.res.AssetManager;
 import android.os.Handler;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
+import android.support.test.espresso.idling.CountingIdlingResource;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -24,12 +28,14 @@ public class LookupWrapper {
 
     private static LookupWrapper instance;
 
-    public static LookupWrapper getInstance() {
+    public synchronized static LookupWrapper getInstance() {
         if (instance == null) {
             instance = new LookupWrapper();
         }
         return instance;
     }
+
+    @Nullable private CountingIdlingResource idlingResource;
 
     private WordLookup wordLookup;
     private boolean hasDictionary = false;
@@ -38,6 +44,10 @@ public class LookupWrapper {
 
 
     public void initFromFile(final Handler mainHandler, final AssetManager assets) {
+        if (idlingResource != null) {
+            idlingResource.increment();
+        }
+
         Executor executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             try {
@@ -61,6 +71,9 @@ public class LookupWrapper {
             for (LookupReadyListener listener : listeners) {
                 listener.onReady();
             }
+            if (idlingResource != null) {
+                idlingResource.decrement();
+            }
         });
     }
 
@@ -78,5 +91,19 @@ public class LookupWrapper {
             return wordLookup.lookup(digits);
         }
         return Collections.emptyList();
+    }
+
+    @VisibleForTesting
+    public IdlingResource getIdlingResource() {
+        if (idlingResource == null) {
+            idlingResource = new CountingIdlingResource("dictionary_loading");
+        }
+        return idlingResource;
+    }
+
+    @VisibleForTesting
+    public void cleanup() {
+        wordLookup = null;
+        hasDictionary = false;
     }
 }

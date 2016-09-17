@@ -1,6 +1,8 @@
 package lv.luhmirin.wordlookup.ui;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,9 +16,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import lv.luhmirin.wordlookup.wrapper.LookupWrapper;
 import lv.luhmirin.wordlookup.R;
 import lv.luhmirin.wordlookup.util.SimpleTextWatcher;
+import lv.luhmirin.wordlookup.wrapper.LookupWrapper;
 
 public class LookupActivity extends AppCompatActivity implements LookupContract {
 
@@ -34,6 +36,10 @@ public class LookupActivity extends AppCompatActivity implements LookupContract 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lookup);
         ButterKnife.bind(this);
+
+
+        // Loading dictionary here because doing it in Application class messes up UI testing flow, for some reason.
+        LookupWrapper.getInstance().initFromFile(new Handler(Looper.getMainLooper()), getAssets());
 
         presenter = new LookupPresenter(this, LookupWrapper.getInstance());
         presenter.onCreate();
@@ -55,7 +61,6 @@ public class LookupActivity extends AppCompatActivity implements LookupContract 
 
     @Override
     public void disableInput() {
-
         input.setEnabled(false);
         placeholder.setText(R.string.lookup_placeholder_loading);
     }

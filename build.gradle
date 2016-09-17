@@ -12,7 +12,8 @@ buildscript {
             mockito    : '1.10.19',
             kluent     : '1.6',
 
-            espresso   : '2.2.2'
+            espresso   : '2.2.2',
+            runner     : '0.5'
 
     ]
 
