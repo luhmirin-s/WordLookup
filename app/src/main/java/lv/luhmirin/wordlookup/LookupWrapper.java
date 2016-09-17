@@ -15,14 +15,21 @@ import java.util.Scanner;
 import lv.luhmirin.MemoryLookup;
 import lv.luhmirin.WordLookup;
 
-public enum LookupWrapper {
+public class LookupWrapper {
 
-    INSTANCE;
+    private static LookupWrapper instance;
+
+    public static LookupWrapper getInstance() {
+        if (instance == null) {
+            instance = new LookupWrapper();
+        }
+        return instance;
+    }
 
     private WordLookup wordLookup;
 
 
-    public void initFromFile(AssetManager assets, String filename) {
+    void initFromFile(AssetManager assets, String filename) {
         try {
             final Scanner scanner = new Scanner(assets.open(filename));
             wordLookup = new MemoryLookup();

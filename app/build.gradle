@@ -38,6 +38,7 @@ dependencies {
     apt "com.jakewharton:butterknife-compiler:$versions.butterknife"
 
     testCompile "junit:junit:$versions.junit"
+    testCompile "org.mockito:mockito-core:$versions.mockito"
 
     androidTestCompile "com.android.support.test.espresso:espresso-core:$versions.espresso"
 
