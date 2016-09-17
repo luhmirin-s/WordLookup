@@ -1,7 +1,6 @@
 package lv.luhmirin
 
 import org.amshove.kluent.shouldContain
-import org.amshove.kluent.shouldEqual
 import org.amshove.kluent.shouldNotContain
 import org.junit.Before
 import org.junit.Test
@@ -47,15 +46,8 @@ class MemoryLookupTest {
     }
 
     @Test
-    fun doesNotCrashWhenNotinitialised() {
-        val result = subject.lookup("7678")
-
-        result shouldEqual emptyList()
-    }
-
-    @Test
     fun loadDictionaryPerformance() {
-        val file = File("src/test/res/wordlist.txt")
+        val file = File("../app/src/main/assets/wordlist.txt")
 
         subject.loadDictionary(file.readLines())
 

@@ -8,8 +8,8 @@ import lv.luhmirin.wordlookup.LookupWrapper;
 
 class LookupPresenter {
 
-    private LookupContract viewContract;
-    private LookupWrapper lookupWrapper;
+    private final LookupContract viewContract;
+    private final LookupWrapper lookupWrapper;
 
     LookupPresenter(LookupContract viewContract, LookupWrapper lookupWrapper) {
         this.viewContract = viewContract;

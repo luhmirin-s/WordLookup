@@ -25,7 +25,7 @@ class LookupResultAdapter extends RecyclerView.Adapter<LookupResultAdapter.Looku
     private final List<String> results;
     private int spanLength = 0;
 
-    private ForegroundColorSpan colorSpan;
+    private final ForegroundColorSpan colorSpan;
 
     LookupResultAdapter(Context context) {
         this.context = context;
@@ -36,7 +36,7 @@ class LookupResultAdapter extends RecyclerView.Adapter<LookupResultAdapter.Looku
 
     @Override
     public LookupResultViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new LookupResultViewHolder(LayoutInflater.from(context).inflate(R.layout.item_lookup, null));
+        return new LookupResultViewHolder(LayoutInflater.from(context).inflate(R.layout.item_lookup, parent, false));
     }
 
     @Override

@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,7 +25,7 @@ public class LookupActivity extends AppCompatActivity implements LookupContract 
     @BindView(R.id.lookup_results) RecyclerView results;
     @BindView(R.id.lookup_placeholder) TextView placeholder;
 
-    LookupResultAdapter resultsAdapter;
+    private LookupResultAdapter resultsAdapter;
 
     private LookupPresenter presenter;
 

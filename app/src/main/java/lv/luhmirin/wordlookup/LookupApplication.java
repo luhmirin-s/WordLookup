@@ -9,6 +9,6 @@ public class LookupApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        LookupWrapper.getInstance().initFromFile(getAssets(), "wordlist.txt");
+        LookupWrapper.getInstance().initFromFile(getAssets());
     }
 }

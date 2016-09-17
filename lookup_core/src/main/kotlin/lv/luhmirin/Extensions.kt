@@ -1,7 +1,7 @@
 package lv.luhmirin
 
 
-fun String.digitize() : String = this.map { it.toDigit() }.joinToString("")
+fun String.digitize(): String = this.map { it.toDigit() }.joinToString("")
 
 fun Char.toDigit(): Char = when (this) {
     in 'a'..'c' -> '2'

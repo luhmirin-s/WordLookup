@@ -23,17 +23,17 @@ public class LookupPresenterTest {
 
     private LookupPresenter subject;
 
-    private List<String> fakeResults = Arrays.asList("aaaa", "bbbbb", "ccccc");
+    private final List<String> fakeResults = Arrays.asList("test1", "test2", "test3");
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         initMocks(this);
 
         subject = new LookupPresenter(mockContract, mockLookupWrapper);
     }
 
     @Test
-    public void initializesUi_whenCreated() throws Exception {
+    public void initializesUi_whenCreated() {
         subject.onCreate();
 
         verify(mockContract).prepareResultListView();
@@ -41,7 +41,7 @@ public class LookupPresenterTest {
     }
 
     @Test
-    public void resetList_whenNoResults() throws Exception {
+    public void resetList_whenNoResults() {
         when(mockLookupWrapper.lookup(anyString())).thenReturn(Collections.<String>emptyList());
 
         subject.inputTextChanged("1234");
@@ -50,7 +50,7 @@ public class LookupPresenterTest {
     }
 
     @Test
-    public void setupList_whenThereAreResults() throws Exception {
+    public void setupList_whenThereAreResults() {
         when(mockLookupWrapper.lookup(anyString())).thenReturn(fakeResults);
 
         subject.inputTextChanged("1234");
@@ -59,7 +59,7 @@ public class LookupPresenterTest {
     }
 
     @Test
-    public void resetHighlightSize_whenEmptyInput() throws Exception {
+    public void resetHighlightSize_whenEmptyInput() {
         when(mockLookupWrapper.lookup(anyString())).thenReturn(Collections.<String>emptyList());
 
         subject.inputTextChanged("");
@@ -68,7 +68,7 @@ public class LookupPresenterTest {
     }
 
     @Test
-    public void setCorrectHighlightSize_whenInputNotEmpty() throws Exception {
+    public void setCorrectHighlightSize_whenInputNotEmpty() {
         when(mockLookupWrapper.lookup(anyString())).thenReturn(fakeResults);
 
         subject.inputTextChanged("1234");
@@ -77,7 +77,7 @@ public class LookupPresenterTest {
     }
 
     @Test
-    public void setPlaceholder_whenNoResults() throws Exception {
+    public void setPlaceholder_whenNoResults() {
         when(mockLookupWrapper.lookup(anyString())).thenReturn(Collections.<String>emptyList());
 
         subject.inputTextChanged("1234");
@@ -86,7 +86,7 @@ public class LookupPresenterTest {
     }
 
     @Test
-    public void hidePlaceholder_whenThereAreResults() throws Exception {
+    public void hidePlaceholder_whenThereAreResults() {
         when(mockLookupWrapper.lookup(anyString())).thenReturn(fakeResults);
 
         subject.inputTextChanged("1234");

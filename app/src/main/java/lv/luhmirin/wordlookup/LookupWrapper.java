@@ -17,6 +17,8 @@ import lv.luhmirin.WordLookup;
 
 public class LookupWrapper {
 
+    private static final String FILENAME = "wordlist.txt";
+
     private static LookupWrapper instance;
 
     public static LookupWrapper getInstance() {
@@ -29,9 +31,9 @@ public class LookupWrapper {
     private WordLookup wordLookup;
 
 
-    void initFromFile(AssetManager assets, String filename) {
+    void initFromFile(AssetManager assets) {
         try {
-            final Scanner scanner = new Scanner(assets.open(filename));
+            final Scanner scanner = new Scanner(assets.open(FILENAME));
             wordLookup = new MemoryLookup();
 
             Iterable<String> iterable = new Iterable<String>() {
