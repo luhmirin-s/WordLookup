@@ -1,8 +1,12 @@
-package lv.luhmirin.wordlookup;
+package lv.luhmirin.wordlookup.ui;
 
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +17,21 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lv.luhmirin.wordlookup.R;
 
 class LookupResultAdapter extends RecyclerView.Adapter<LookupResultAdapter.LookupResultViewHolder> {
 
     private final Context context;
     private final List<String> results;
+    private int spanLength = 0;
 
-    public LookupResultAdapter(Context context) {
+    private ForegroundColorSpan colorSpan;
+
+    LookupResultAdapter(Context context) {
         this.context = context;
         this.results = new ArrayList<>();
+
+        this.colorSpan = new ForegroundColorSpan(ContextCompat.getColor(context, R.color.accent));
     }
 
     @Override
@@ -31,9 +41,9 @@ class LookupResultAdapter extends RecyclerView.Adapter<LookupResultAdapter.Looku
 
     @Override
     public void onBindViewHolder(LookupResultViewHolder holder, int position) {
-        String item = results.get(position);
+        Spannable item = new SpannableString(results.get(position));
 
-        // TODO: spannable goes here
+        item.setSpan(colorSpan, 0, spanLength, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         holder.text.setText(item);
     }
@@ -43,11 +53,15 @@ class LookupResultAdapter extends RecyclerView.Adapter<LookupResultAdapter.Looku
         return results.size();
     }
 
-    public void updateResults(List<String> newResults) {
+    void updateResults(List<String> newResults) {
         results.clear();
         results.addAll(newResults);
 
         notifyDataSetChanged();
+    }
+
+    void setSpanLength(int spanLength) {
+        this.spanLength = spanLength;
     }
 
     static class LookupResultViewHolder extends RecyclerView.ViewHolder {
