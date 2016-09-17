@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Word Lookup</string>
+    <string name="lookup_input_hint">Word in T9 form...</string>
 </resources>
