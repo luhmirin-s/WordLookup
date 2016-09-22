@@ -48,6 +48,8 @@ public class LookupWrapper {
     private boolean hasDictionary = false;
 
     public void initFromFile(@NotNull final Handler mainHandler, @NotNull final AssetManager assets) {
+        if (hasDictionary) return;
+
         if (idlingResource != null) {
             idlingResource.increment();
         }
